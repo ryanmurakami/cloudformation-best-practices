@@ -1,7 +1,8 @@
 # Use IAM Service Roles for CloudFormation permissions
 
 Create an IAM role with only these permissions:
-- Create DynamoDB table
+- `dynamodb:CreateTable`
+- `dynamodb:DescribeTable`
 
 Get the role ARN
 
