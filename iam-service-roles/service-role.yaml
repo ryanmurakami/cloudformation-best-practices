@@ -22,6 +22,7 @@ Resources:
             Statement:
               - Effect: Allow
                 Action:
+                  - 'dynamodb:DeleteTable'
                   - 'dynamodb:DescribeTable'
                   - 'dynamodb:CreateTable'
                 Resource:
@@ -30,3 +31,7 @@ Resources:
                     - - 'arn:aws:dynamodb:*:'
                       - !Ref AWS::AccountId
                       - ':table/sampleForIAMServiceRoles'
+
+Outputs:
+  ServiceRoleARN:
+    Value: !GetAtt ServiceRole.Arn

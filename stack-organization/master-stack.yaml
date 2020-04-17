@@ -1,0 +1,51 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Master stack
+Resources:
+  AllTeamsVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsHostnames: 'true'
+      Tags:
+        - Key: Name
+          Value: Everyones-vpc
+
+  HbflVPCSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref AllTeamsVPC
+      CidrBlock: 10.0.0.0/24
+      AvailabilityZone:
+        !Join
+          - ''
+          - - !Ref AWS::Region
+            - 'a'
+      Tags:
+        - Key: Name
+          Value: HBFL-subnet
+
+  TrashPandaBuffetVPCSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref AllTeamsVPC
+      CidrBlock: 10.0.1.0/24
+      AvailabilityZone:
+        !Join
+          - ''
+          - - !Ref AWS::Region
+            - 'a'
+      Tags:
+        - Key: Name
+          Value: TrashPandaBuffet-subnet
+
+  HbflEBApplication:
+    Type: AWS::ElasticBeanstalk::Application
+    Properties:
+      ApplicationName: HBFL-Web
+      Description: "Web interface for the HBFL application"
+
+  TrashPandaBuffetEBApplication:
+    Type: AWS::ElasticBeanstalk::Application
+    Properties:
+      ApplicationName: TrashPandaBuffet-Web
+      Description: "Web interface for the Trash Panda Buffet Game"
