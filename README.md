@@ -1,6 +1,6 @@
 # Demo Code for AWS CloudFormation Stacks and Automation: Best Practices
 
-This repository contains the demo project for the [Practicing CI/CD with AWS CodePipeline course on Pluralsight.com](http://www.pluralsight.com/courses/aws-developer-designing-developing).
+This repository contains the demo code for the [AWS CloudFormation Stacks and Automation: Best Practices](http://www.pluralsight.com/courses/aws-cloudformation-stacks-automation-best-practices).
 
 ## List of Best Practices
 
