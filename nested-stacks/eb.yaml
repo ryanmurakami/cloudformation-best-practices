@@ -1,0 +1,68 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Master stack
+Parameters:
+  ApplicationName:
+    Type: String
+    Description: Enter the name of your application with no spaces.
+  Platform:
+    Type: String
+    AllowedValues:
+      - dotnet
+      - node
+      - python
+    ConstraintDescription: Must pick between dotnet, node, or python for your Application platform.
+  VPCId:
+    Type: AWS::EC2::VPC::Id
+  SubnetA:
+    Type: AWS::EC2::Subnet::Id
+  SubnetB:
+    Type: AWS::EC2::Subnet::Id
+
+Mappings:
+  EBPlatformMap:
+    dotnet:
+      version: dotnet-v4
+      SolutionStackName: 64bit Windows Server 2019 v2.5.2 running IIS 10.0
+    node:
+      version: node-v12
+      SolutionStackName: 64bit Amazon Linux 2018.03 v4.14.1 running Node.js
+    python:
+      version: python-v3
+      SolutionStackName: 64bit Amazon Linux 2 v3.0.0 running Python 3.7
+
+Resources:
+  EBApplication:
+    Type: AWS::ElasticBeanstalk::Application
+    Properties:
+      ApplicationName:
+        !Join
+          - ''
+          - - !Ref ApplicationName
+            - '-web'
+      Description: "Web interface for the Application"
+
+  EBEnvironment:
+    Type: AWS::ElasticBeanstalk::Environment
+    Properties:
+      ApplicationName: !Ref EBApplication
+      EnvironmentName:
+        !Join
+          - ''
+          - - !Ref ApplicationName
+            - '-web-env-'
+            - !FindInMap [EBPlatformMap, !Ref Platform, version]
+      SolutionStackName:
+        !FindInMap
+          - EBPlatformMap
+          - !Ref Platform
+          - SolutionStackName
+      OptionSettings:
+        - Namespace: aws:ec2:vpc
+          OptionName: VPCId
+          Value: !Ref VPCId
+        - Namespace: aws:ec2:vpc
+          OptionName: Subnets
+          Value: !Ref SubnetA
+        - Namespace: aws:ec2:vpc
+          OptionName: ELBSubnets
+          Value: !Ref SubnetB

@@ -1,0 +1,52 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Master stack
+Parameters:
+  ApplicationName:
+    Type: String
+    Default: Sample
+    Description: Enter the name of your application with no spaces.
+  Platform:
+    Type: String
+    AllowedValues:
+      - dotnet
+      - node
+      - python
+    Default: node
+    ConstraintDescription: Must pick between dotnet, node, or python for your Application platform.
+  SubnetAZ:
+    Type: AWS::EC2::AvailabilityZone::Name
+    Default: us-west-1a
+    Description: Enter the availability zone for your subnet.
+  BucketName:
+    Type: String
+    Description: Enter the S3 bucket where the nested stack templates exist
+
+Resources:
+  EBStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL:
+        !Join
+          - ''
+          - - 'https://s3.amazonaws.com/'
+            - !Ref BucketName
+            - '/eb.yaml'
+      Parameters:
+        ApplicationName: !Ref ApplicationName
+        Platform: !Ref Platform
+        VPCId: !GetAtt VPCStack.Outputs.VPCId
+        SubnetA: !GetAtt VPCStack.Outputs.SubnetA
+        SubnetB: !GetAtt VPCStack.Outputs.SubnetB
+
+  VPCStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL:
+        !Join
+          - ''
+          - - 'https://s3.amazonaws.com/'
+            - !Ref BucketName
+            - '/vpc.yaml'
+      Parameters:
+        ApplicationName: !Ref ApplicationName
+        SubnetAZ: !Ref SubnetAZ

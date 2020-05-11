@@ -1,0 +1,66 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Master stack
+Parameters:
+  VPCState:
+    Type: String
+    AllowedValues:
+      - new
+      - existing
+    ConstraintDescription: Must state whether there is an existing VPC or not
+  ApplicationName:
+    Type: String
+    Default: Sample
+    Description: Enter the name of your application with no spaces.
+  SubnetAZ:
+    Type: AWS::EC2::AvailabilityZone::Name
+    Default:
+      !Join
+        - ''
+        - - !Ref AWS::Region
+          - 'a'
+    Description: Enter the availability zone for your subnet.
+
+Conditions:
+  IsNewVPC: !Equals [ !Ref VPCState, new ]
+
+Resources:
+  VPC:
+    Type: AWS::EC2::VPC
+    Condition: IsNewVPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsHostnames: 'true'
+      Tags:
+        - Key: Name
+          Value:
+            !Join
+              - ''
+              - - !Ref ApplicationName
+                - '-vpc'
+
+  VPCSubnet:
+    Type: AWS::EC2::Subnet
+    Condition: IsNewVPC
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.0.0/24
+      AvailabilityZone: !Ref SubnetAZ
+      Tags:
+        - Key: Name
+          Value:
+            !Join
+              - ''
+              - - !Ref ApplicationName
+                - '-subnet'
+
+  EBApplication:
+    Type: AWS::ElasticBeanstalk::Application
+    Properties:
+      ApplicationName:
+        !Join
+          - ''
+          - - !Ref ApplicationName
+            - '-web'
+            - !If [IsNewVPC, '-new', '-not-new']
+      Description: "Web interface for the Application"
+

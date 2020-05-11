@@ -1,0 +1,49 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Master stack
+Parameters:
+  ApplicationName:
+    Type: String
+    Default: Sample
+    Description: Enter the name of your application with no spaces.
+  SubnetAZ:
+    Type: AWS::EC2::AvailabilityZone::Name
+    Default: us-west-1a
+    Description: Enter the availability zone for your subnet.
+
+Resources:
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsHostnames: 'true'
+      Tags:
+        - Key: Name
+          Value:
+            !Join
+              - ''
+              - - !Ref ApplicationName
+                - '-vpc'
+
+  VPCSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.0.0/24
+      AvailabilityZone: !Ref SubnetAZ
+      Tags:
+        - Key: Name
+          Value:
+            !Join
+              - ''
+              - - !Ref ApplicationName
+                - '-subnet'
+
+  EBApplication:
+    Type: AWS::ElasticBeanstalk::Application
+    Properties:
+      ApplicationName:
+        !Join
+          - ''
+          - - !Ref ApplicationName
+            - '-web'
+      Description: "Web interface for the Application"

@@ -1,0 +1,72 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Master stack
+Parameters:
+  ApplicationName:
+    Type: String
+    Description: Enter the name of your application with no spaces.
+  SubnetAZ:
+    Type: AWS::EC2::AvailabilityZone::Name
+    Description: Enter the availability zone for your subnet.
+
+Resources:
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsHostnames: 'true'
+      Tags:
+        - Key: Name
+          Value:
+            !Join
+              - ''
+              - - !Ref ApplicationName
+                - '-vpc'
+
+  VPCSubnetA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.0.0/24
+      AvailabilityZone: !Ref SubnetAZ
+      Tags:
+        - Key: Name
+          Value:
+            !Join
+              - ''
+              - - !Ref ApplicationName
+                - '-subnet'
+
+  VPCSubnetB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.1.0/24
+      AvailabilityZone: !Ref SubnetAZ
+      Tags:
+        - Key: Name
+          Value:
+            !Join
+              - ''
+              - - !Ref ApplicationName
+                - '-subnetb'
+
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: !Join [_, [!Ref 'AWS::StackName']]
+
+  GatewayToInternet:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref VPC
+      InternetGatewayId: !Ref InternetGateway
+
+Outputs:
+  VPCId:
+    Value: !Ref VPC
+  SubnetA:
+    Value: !Ref VPCSubnetA
+  SubnetB:
+    Value: !Ref VPCSubnetB
