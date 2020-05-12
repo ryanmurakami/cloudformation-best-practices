@@ -1,5 +1,9 @@
 # Use IAM Service Roles for CloudFormation permissions
 
+### AWS Best Practice Reference
+[Use IAM to Control Access](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/best-practices.html#use-iam-to-control-access)
+
+## Example Code Instructions
 Create an IAM role with only these permissions:
 - `dynamodb:CreateTable`
 - `dynamodb:DescribeTable`

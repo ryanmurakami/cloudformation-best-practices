@@ -1,11 +1,6 @@
-# Reuse CloudFormation Templates
+# Share Cross-Stack Output Values
 
-Create the stack with the command:
-```sh
-aws cloudformation create-stack --stack-name master-organization --template-body file://master-stack.yaml
-```
+### AWS Best Practice Reference
+[Use Cross-Stack References to Export Shared Resources](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/best-practices.html#cross-stack)
 
-Remove the stack with the command:
-```sh
-aws cloudformation delete-stack --stack-name master-organization
-```
+## Example Code Instructions
