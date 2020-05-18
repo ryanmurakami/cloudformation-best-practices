@@ -4,3 +4,15 @@
 [Use Cross-Stack References to Export Shared Resources](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/best-practices.html#cross-stack)
 
 ## Example Code Instructions
+
+Create the VPC stack with the command:
+```sh
+aws cloudformation create-stack --stack-name example-vpc --template-body file://vpc.yaml --parameters file://parameters-vpc.json
+```
+
+Wait until the VPC stack is completed.
+
+Create the EB stack with the command:
+```sh
+aws cloudformation create-stack --stack-name example-eb --template-body file://eb.yaml --parameters file://parameters-eb.json
+```

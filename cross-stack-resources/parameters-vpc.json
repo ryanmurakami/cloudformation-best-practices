@@ -1,0 +1,10 @@
+[
+  {
+    "ParameterKey": "ApplicationName",
+    "ParameterValue": "HBFL"
+  },
+  {
+    "ParameterKey": "SubnetAZ",
+    "ParameterValue": "us-west-2a"
+  }
+]
