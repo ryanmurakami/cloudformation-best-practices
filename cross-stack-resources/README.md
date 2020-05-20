@@ -7,12 +7,18 @@
 
 Create the VPC stack with the command:
 ```sh
-aws cloudformation create-stack --stack-name example-vpc --template-body file://vpc.yaml --parameters file://parameters-vpc.json
+aws cloudformation create-stack \
+  --stack-name example-vpc \
+  --template-body file://vpc.yaml \
+  --parameters file://parameters-vpc.json
 ```
 
 Wait until the VPC stack is completed.
 
 Create the EB stack with the command:
 ```sh
-aws cloudformation create-stack --stack-name example-eb --template-body file://eb.yaml --parameters file://parameters-eb.json
+aws cloudformation create-stack \
+  --stack-name example-eb \
+  --template-body file://eb.yaml \
+  --parameters file://parameters-eb.json
 ```
