@@ -32,7 +32,7 @@ aws cloudformation create-stack \
   --role-arn "<insert iam role arn>"
 ```
 
-### Removal
+## Removal
 
 Remove the example stack with the command:
 ```sh

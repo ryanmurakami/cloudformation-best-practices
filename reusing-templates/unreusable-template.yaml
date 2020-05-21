@@ -13,7 +13,7 @@ Resources:
   HbflVPCSubnet:
     Type: AWS::EC2::Subnet
     Properties:
-      VpcId: !Ref AllTeamsVPC
+      VpcId: !Ref HbflVPC
       CidrBlock: 10.0.0.0/24
       AvailabilityZone:
         !Join

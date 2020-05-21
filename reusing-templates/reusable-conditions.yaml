@@ -13,11 +13,7 @@ Parameters:
     Description: Enter the name of your application with no spaces.
   SubnetAZ:
     Type: AWS::EC2::AvailabilityZone::Name
-    Default:
-      !Join
-        - ''
-        - - !Ref AWS::Region
-          - 'a'
+    Default: us-west-2a
     Description: Enter the availability zone for your subnet.
 
 Conditions:

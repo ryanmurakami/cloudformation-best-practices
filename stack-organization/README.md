@@ -15,6 +15,8 @@ aws cloudformation create-stack \
 
 ### Create the better organized stacks
 
+**Note: You must remove the above `mono-stack-example` before creating the below stacks.
+
 ```sh
 aws cloudformation create-stack \
   --stack-name hbfl-stack-example \
@@ -27,7 +29,7 @@ aws cloudformation create-stack \
   --template-body file://tpb-stack.yaml
 ```
 
-### Removal
+## Removal
 
 Remove the mono-stack with the command:
 ```sh

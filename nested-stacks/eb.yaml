@@ -66,10 +66,10 @@ Resources:
         - Namespace: aws:elasticbeanstalk:environment
           OptionName: EnvironmentType
           Value: SingleInstance
-        - Namespace: 'aws:elasticbeanstalk:environment'
+        - Namespace: aws:elasticbeanstalk:environment
           OptionName: ServiceRole
           Value: !Ref ServiceRole
-        - Namespace: 'aws:autoscaling:launchconfiguration'
+        - Namespace: aws:autoscaling:launchconfiguration
           OptionName: IamInstanceProfile
           Value: !Ref InstanceProfile
 

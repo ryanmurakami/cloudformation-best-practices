@@ -5,6 +5,8 @@
 
 ## Example Code Instructions
 
+### Create both stacks
+
 Create the VPC stack with the command:
 ```sh
 aws cloudformation create-stack \
@@ -21,4 +23,18 @@ aws cloudformation create-stack \
   --stack-name example-eb \
   --template-body file://eb.yaml \
   --parameters file://parameters-eb.json
+```
+
+## Removal
+
+Remove the unnested stack with the command:
+```sh
+aws cloudformation delete-stack \
+  --stack-name example-vpc
+```
+
+Then, remove nested stack example with this command:
+```sh
+aws cloudformation delete-stack \
+  --stack-name example-eb
 ```

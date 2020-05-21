@@ -7,7 +7,7 @@ Parameters:
     Description: Enter the name of your application with no spaces.
   SubnetAZ:
     Type: AWS::EC2::AvailabilityZone::Name
-    Default: us-west-1a
+    Default: us-west-2a
     Description: Enter the availability zone for your subnet.
 
 Resources:
