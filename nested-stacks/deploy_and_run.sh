@@ -15,6 +15,7 @@ aws cloudformation create-stack \
   --stack-name nested-stack-example \
   --template-body file://nested.yaml \
   --region us-west-2 \
+  --capabilities CAPABILITY_NAMED_IAM \
   --parameters \
   ParameterKey=ApplicationName,ParameterValue=HBFL \
   ParameterKey=SubnetAZ,ParameterValue=us-west-2a \
