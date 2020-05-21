@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Master stack
+Description: Unreusable template due to hard-coded values
 Resources:
   HbflVPC:
     Type: AWS::EC2::VPC

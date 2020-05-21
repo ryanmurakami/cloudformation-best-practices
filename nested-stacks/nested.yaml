@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Master stack
+Description: Parent stack with nested stacks
 Parameters:
   ApplicationName:
     Type: String

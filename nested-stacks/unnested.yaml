@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Master stack
+Description: Unnested stack
 Resources:
   HbflVPC:
     Type: AWS::EC2::VPC

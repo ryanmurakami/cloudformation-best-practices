@@ -1,7 +1,9 @@
 #!/bin/bash
 
-# BUCKET_NAME=<unique-bucket-name>
-BUCKET_NAME="ryan-unique-cf-bucket"
+# Give your S3 bucket a unique name
+# Example: BUCKET_NAME="my-unique-cf-bucket"
+BUCKET_NAME=<unique-bucket-name>
+
 
 # Create S3 Bucket
 aws s3 mb s3://$BUCKET_NAME

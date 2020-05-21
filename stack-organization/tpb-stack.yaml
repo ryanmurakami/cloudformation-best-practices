@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Master stack
+Description: Template for Trash Panda Buffet game
 Resources:
   TrashPandaBuffetVPC:
     Type: AWS::EC2::VPC

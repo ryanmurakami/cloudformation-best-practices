@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Master stack
+Description: Template with Mappings
 Parameters:
   ApplicationName:
     Type: String
