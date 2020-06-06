@@ -28,14 +28,14 @@ aws cloudformation create-stack \
 
 ## Removal
 
-Remove the VPC stack with the command:
-```sh
-aws cloudformation delete-stack \
-  --stack-name example-vpc
-```
-
-Then, remove EB stack with this command:
+Remove the EB stack with the command:
 ```sh
 aws cloudformation delete-stack \
   --stack-name example-eb
+```
+
+Then, remove VPC stack with this command:
+```sh
+aws cloudformation delete-stack \
+  --stack-name example-vpc
 ```

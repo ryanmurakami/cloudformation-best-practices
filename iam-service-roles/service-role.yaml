@@ -30,7 +30,7 @@ Resources:
                     - ''
                     - - 'arn:aws:dynamodb:*:'
                       - !Ref AWS::AccountId
-                      - ':table/sampleForIAMServiceRoles'
+                      - ':table/sampleForIAMServiceRoles2'
 
 Outputs:
   ServiceRoleARN:

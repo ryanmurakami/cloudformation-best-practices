@@ -1,0 +1,39 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Simple template to create an EC2 instance to watch
+Parameters:
+  AMI:
+    Type: AWS::EC2::Image::Id
+    Default: ami-0d6621c01e8c2de2c
+
+Resources:
+  ExampleEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      ImageId: !Ref AMI
+      SubnetId: !Ref VPCSubnet
+      Tags:
+        - Key: Name
+          Value: example-instance
+
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsHostnames: 'true'
+      Tags:
+        - Key: Name
+          Value: example-vpc
+
+  VPCSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.0.0/24
+      AvailabilityZone:
+        !Select
+          - 0
+          - Fn::GetAZs: !Ref 'AWS::Region'
+      Tags:
+        - Key: Name
+          Value: example-subnet
