@@ -5,12 +5,12 @@
 
 ## Example Code Instructions
 
-### Create an IAM service role
+### Create the example stack
 
-Create the instance example with this command:
+Create the drift detection example with this command:
 ```sh
 aws cloudformation create-stack \
-  --stack-name instance-example \
+  --stack-name drift-detection-example \
   --template-body file://stack.yaml
 ```
 
@@ -19,5 +19,5 @@ aws cloudformation create-stack \
 Remove the example stack with the command:
 ```sh
 aws cloudformation delete-stack \
-  --stack-name instance-example
+  --stack-name drift-detection-example
 ```
